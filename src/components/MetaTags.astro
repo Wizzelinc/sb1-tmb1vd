@@ -1,0 +1,51 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  keywords: string[];
+  ogImage?: string;
+  ogType?: string;
+  canonical?: string;
+}
+
+const {
+  title,
+  description,
+  keywords,
+  ogImage = '/images/default-og.jpg',
+  ogType = 'website',
+  canonical = Astro.url.href,
+} = Astro.props;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords.join(', ')} />
+<meta name="robots" content="index, follow" />
+
+<!-- Open Graph -->
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={ogType} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:url" content={canonical} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<!-- Canonical -->
+<link rel="canonical" href={canonical} />
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": title,
+    "description": description,
+    "url": canonical
+  }
+</script>

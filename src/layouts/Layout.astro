@@ -1,0 +1,47 @@
+---
+import Header from '../components/Header.astro';
+import { SITE_CONFIG } from '../config/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = SITE_CONFIG.title, description = SITE_CONFIG.description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:;">
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body class="min-h-screen bg-gray-100">
+    <Header />
+    <slot />
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p class="text-center text-gray-400">
+          © {new Date().getFullYear()} {SITE_CONFIG.title}. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --accent: 136, 58, 234;
+    --accent-light: 224, 204, 250;
+    --accent-dark: 49, 10, 101;
+  }
+  html {
+    font-family: system-ui, sans-serif;
+    background: #f3f4f6;
+  }
+</style>

@@ -1,0 +1,47 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import { SITE_CONFIG } from '../../config/site';
+
+// Check authentication
+if (!Astro.cookies.get('adminToken')) {
+  return Astro.redirect('/login');
+}
+---
+
+<AdminLayout title="Admin Dashboard">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl font-bold text-gray-900 mb-8">Admin Dashboard</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <a href="/admin/categories" class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+        <h2 class="text-xl font-semibold mb-2">Categories</h2>
+        <p class="text-gray-600">Manage product categories and subcategories</p>
+      </a>
+      
+      <a href="/admin/products" class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+        <h2 class="text-xl font-semibold mb-2">Products</h2>
+        <p class="text-gray-600">Add and edit product reviews</p>
+      </a>
+      
+      <a href="/admin/blog" class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+        <h2 class="text-xl font-semibold mb-2">Blog Posts</h2>
+        <p class="text-gray-600">Manage blog content and articles</p>
+      </a>
+      
+      <a href="/admin/affiliates" class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+        <h2 class="text-xl font-semibold mb-2">Affiliates</h2>
+        <p class="text-gray-600">Manage affiliate partners and links</p>
+      </a>
+      
+      <a href="/admin/settings" class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+        <h2 class="text-xl font-semibold mb-2">Site Settings</h2>
+        <p class="text-gray-600">Update website configuration</p>
+      </a>
+      
+      <a href="/admin/analytics" class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+        <h2 class="text-xl font-semibold mb-2">Analytics</h2>
+        <p class="text-gray-600">View site statistics and performance</p>
+      </a>
+    </div>
+  </div>
+</AdminLayout>
